@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
+import Recipe from "./recipe";
 import './App.css';
 
 const App = () => {
-
   const APP_ID = 'f0cf7372';
-  const APP_KEY = '605e21ecc6b0822b7868ce895ae88362';
-  const exampleReq = `https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`;
+  const APP_KEY = '0388793d2296dc75bbbdc9d97131b383';
 
-  const [counter, setCounter] = useState(0);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    console.log('Effect has been run');
-  });
+    getRecipes();
+  }, []);
 
-
+  const getRecipes = async () => {
+    const response = await fetch(
+      `https://api.edamam.com/api/food-database/v2/parser?nutrition-type=logging&ingr=red%20apple&app_id=${APP_ID}&app_key=${APP_KEY}`
+    );
+    const data = await response.json();
+    setRecipes(data.hits);
+    console.log(data.hits);
+    // another way to write everything
+    // fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`)
+    // .then (repsonse => {
+    // response.json...
+  };
 
   return (
     <div className="App">
@@ -22,11 +32,13 @@ const App = () => {
         <button type="submit" className="search-button">
           Search
         </button>
-        <h1 onClick={() => setCounter(counter + 1)}>{counter}</h1>
       </form>
+      {recipes.map(recipe => (
+        <Recipe />
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default App;
 
