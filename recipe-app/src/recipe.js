@@ -7,7 +7,7 @@ const Recipe = () => {
             <p>Calories</p>
             <img src="" alt="" />
         </div>
-    )
-}
+    );
+};
 
 export default Recipe;

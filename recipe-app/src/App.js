@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Recipe from "./recipe";
+import Recipe from "./Recipe";
 import './App.css';
 
 const App = () => {
@@ -17,8 +17,8 @@ const App = () => {
       `https://api.edamam.com/api/food-database/v2/parser?nutrition-type=logging&ingr=red%20apple&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data = await response.json();
-    setRecipes(data.hits);
-    console.log(data.hits);
+    setRecipes(data.hints);
+    console.log(data.hints);
     // another way to write everything
     // fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`)
     // .then (repsonse => {
@@ -34,7 +34,7 @@ const App = () => {
         </button>
       </form>
       {recipes.map(recipe => (
-        <Recipe />
+        <Recipe title={recipe.food.label} title={recipe.food.nutrients.ENERG_KCAL} />
       ))}
     </div>
   );
