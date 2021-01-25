@@ -8,7 +8,7 @@ const App = () => {
 
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('banana');
+  const [query, setQuery] = useState('canned');
 
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const App = () => {
       `https://api.edamam.com/api/food-database/v2/parser?nutrition-type=logging&ingr=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data = await response.json();
-    console.log(data)
     setRecipes(data.hints);
     // another way to write everything
     // fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`)
@@ -58,7 +57,6 @@ const App = () => {
     </div>
   );
 };
-
 export default App;
 
 
